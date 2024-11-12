@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>co.edu.javeriana.as</groupId>
+    <artifactId>personapp-hexa-spring-boot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>PersonAPP</name>
+    <description>App Hexagonal (Clean Architecture) Multi Module PersonAPP</description>
+
+    <properties>
+        <revision>0.0.1-SNAPSHOT</revision>  <!-- Definición explícita -->
+        <global.java.version>11</global.java.version>
+        <global.springframework.boot.version>2.7.11</global.springframework.boot.version>
+        <global.springframework.version>5.3.27</global.springframework.version>
+        <maven.compiler.source>${global.java.version}</maven.compiler.source>
+        <maven.compiler.target>${global.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <module>common</module>
+        <module>domain</module>
+        <module>application</module>
+        <module>maria-output-adapter</module>
+        <module>mongo-output-adapter</module>
+        <module>rest-input-adapter</module>
+        <module>cli-input-adapter</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${global.springframework.boot.version}</version>
+					<executions>
+						<execution>
+							<id>default-repackage</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<skip>false</skip> <!-- Ignorar si no es necesario -->
+					</configuration>
+				</plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>${global.java.version}</source>
+                        <target>${global.java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${global.springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-data-rest</artifactId>
+                <version>1.7.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
