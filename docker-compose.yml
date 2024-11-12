@@ -18,6 +18,20 @@ services:
       - app_network
     restart: on-failure
 
+  cli-service:
+    build:
+      context: ./cli-input-adapter
+      dockerfile: Dockerfile.cli
+    depends_on:
+      - maria-db
+      - mongo-db
+    stdin_open: true  # Mantiene abierto stdin
+    tty: true         # Habilita pseudo-TTY
+    networks:
+      - app_network
+    restart: on-failure
+
+
   # Servicio MongoDB
   mongo-db:
     image: mongo:latest
@@ -33,7 +47,6 @@ services:
       - ./persona_dml_mongo.js:/docker-entrypoint-initdb.d/persona_dml_mongo.js
     networks:
       - app_network
-
 
   # Servicio MariaDB
   maria-db:

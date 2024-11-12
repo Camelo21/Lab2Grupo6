@@ -19,6 +19,7 @@ WORKDIR /PERSONAPP-HEXA-SPRING-BOOT
 # Copiamos el archivo .jar específico del REST desde el builder
 COPY --from=builder /app/rest-input-adapter/target/*.jar app.jar
 
+
 # Exponer el puerto 8080 para el servicio REST
 EXPOSE 3000
 
